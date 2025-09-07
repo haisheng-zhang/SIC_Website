@@ -1,0 +1,6 @@
+# robots.txt for Singapore Innovation Centre (SIC) Website
+
+User-agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml

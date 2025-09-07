@@ -1,0 +1,48 @@
+<svg width="250" height="250" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#f5f5f5"/>
+  
+  <!-- 渐变定义 -->
+  <defs>
+    <linearGradient id="jacket-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#333333"/>
+      <stop offset="100%" stop-color="#222222"/>
+    </linearGradient>
+    <linearGradient id="shirt-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f0f0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 西装外套 -->
+  <path d="M75,140 L95,140 L95,250 L75,250 Z" fill="url(#jacket-gradient)"/>
+  <path d="M155,140 L175,140 L175,250 L155,250 Z" fill="url(#jacket-gradient)"/>
+  
+  <!-- 衬衫 -->
+  <rect x="95" y="140" width="60" height="110" fill="url(#shirt-gradient)"/>
+  
+  <!-- 领带 -->
+  <path d="M125,140 L115,170 L125,200 L135,170 L125,140" fill="#0071bc"/>
+  
+  <!-- 头部轮廓 -->
+  <circle cx="125" cy="90" r="50" fill="#f0d0b0"/>
+  
+  <!-- 眼镜 -->
+  <rect x="95" y="80" width="60" height="20" rx="10" stroke="#333333" stroke-width="3" fill="none"/>
+  <line x1="95" y1="90" x2="85" y2="85" stroke="#333333" stroke-width="3"/>
+  <line x1="155" y1="90" x2="165" y2="85" stroke="#333333" stroke-width="3"/>
+  
+  <!-- 头发 -->
+  <path d="M125,40 C90,40 80,60 80,90 C80,95 85,100 90,100 C90,70 100,50 125,50 C150,50 160,70 160,100 C165,100 170,95 170,90 C170,60 160,40 125,40" fill="#333333"/>
+  
+  <!-- 脸部特征简化 -->
+  <circle cx="105" cy="90" r="5" fill="#333"/><!-- 左眼 -->
+  <circle cx="145" cy="90" r="5" fill="#333"/><!-- 右眼 -->
+  <path d="M115 120 Q125 125 135 120" stroke="#333" stroke-width="3" fill="transparent"/><!-- 微笑 -->
+  
+  <!-- 胡子 -->
+  <path d="M95 110 Q125 140 155 110" stroke="#333" stroke-width="2" fill="transparent"/>
+  
+  <!-- 文字标签 -->
+  <text x="125" y="230" font-family="Arial" font-size="14" text-anchor="middle" fill="white">王教授</text>
+</svg>

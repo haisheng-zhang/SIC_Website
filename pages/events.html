@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Singapore Innovation Centre (SIC)</title>
+    <meta name="description" content="Stay updated with the latest innovation events, workshops, and conferences organized by Singapore Innovation Centre (SIC).">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add website icon -->
+    <link rel="icon" href="../resources/images/favicon.ico" type="image/x-icon">
+    <style>
+        /* Events page specific styles */
+        .events-header {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .events-filter {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 8px 20px;
+            margin: 0 10px 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+        
+        .event-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .event-image {
+            height: 240px;
+            overflow: hidden;
+        }
+        
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+        
+        .event-content {
+            padding: 20px;
+        }
+        
+        .event-date {
+            display: inline-block;
+            background-color: #0056b3;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .event-title {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+        
+        .event-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .load-more {
+            text-align: center;
+            margin: 30px 0 60px;
+        }
+        
+        .upcoming-events {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+        }
+                
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .featured-event {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .featured-event-image {
+            flex: 0 0 50%;
+            max-width: 50%;
+            height: 350px;
+        }
+        
+        .featured-event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .featured-event-content {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 30px;
+        }
+        
+        .featured-event-title {
+            font-size: 24px;
+            margin: 15px 0;
+        }
+        
+        .featured-event-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .featured-event-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .past-events {
+            padding: 60px 0;
+        }
+        
+        /* Media queries */
+        @media (max-width: 992px) {
+            .featured-event-image, .featured-event-content {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            
+            .featured-event-image {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .events-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../resources/images/logo.svg" alt="Singapore Innovation Centre Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <a href="./courses.html">Bootcamps <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./courses.html#food">Food Innovation</a></li>
+                            <li><a href="./courses.html#tech">Technology Innovation</a></li>
+                            <li><a href="./courses.html#sustainability">Sustainability Innovation</a></li>
+                            <li><a href="./courses.html#special">Special Projects</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="./events.html" class="active">Events</a></li>
+                    <li class="has-dropdown">
+                        <a href="./about.html">About Us <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./about.html#mission">Mission & Vision</a></li>
+                            <li><a href="./about.html#team">Our Team</a></li>
+                            <li><a href="./about.html#history">History</a></li>
+                            <li><a href="./about.html#partners">Partners</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured event -->
+    <section class="upcoming-events">
+        <div class="container">
+            <h2 class="section-title">Featured Event</h2>
+            <div class="featured-event">
+                <div class="featured-event-image">
+                    <img src="../resources/images/featured-event.avif" alt="Singapore Innovation Summit 2023">
+                </div>
+                <div class="featured-event-content">
+                    <span class="event-date">November 15-17, 2023</span>
+                    <h3 class="featured-event-title">Singapore Innovation Summit 2023</h3>
+                    <p class="featured-event-description">Join us for the largest innovation conference in Singapore, featuring keynote speakers from leading global companies, interactive workshops, and networking opportunities with industry experts.</p>
+                    <div class="featured-event-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Marina Bay Sands Convention Centre</span>
+                        <span><i class="fas fa-ticket-alt"></i> Paid Event</span>
+                    </div>
+                    <a href="../pages/events/innovation-summit.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming events -->
+    <section class="upcoming-events">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-grid">
+                <div class="row">
+                    <!-- Event card 1 -->
+                    <div class="col-md-4">
+                        <div class="event-card" data-category="workshop">
+                            <div class="event-image">
+                                <img src="../resources/images/sg-event.jpg" alt="Design Thinking Workshop">
+                            </div>
+                            <div class="event-content">
+                                <span class="event-date">October 5, 2023</span>
+                                <h3 class="event-title">Design Thinking Workshop</h3>                               
+                                <p class="event-description">Learn the principles and practices of design thinking to solve complex problems and drive innovation in your organization.</p>
+                                <div class="event-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> SIC Innovation Lab</span>
+                                    <span><i class="fas fa-ticket-alt"></i> Free</span>
+                                </div>
+                                <a href="../pages/events/design-thinking.html" class="btn btn-outline">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-grid">
+                <div class="row">
+                     <!-- Event card 2 -->
+                    <div class="col-md-4">
+                        <div class="event-card" data-category="seminar">
+                            <div class="event-image">
+                                <img src="../resources/images/sg-event.jpg" alt="The Future of AI Seminar">
+                            </div>
+                            <div class="event-content">
+                                <span class="event-date">October 12, 2023</span>
+                                <h3 class="event-title">The Future of AI Seminar</h3>
+                                <p class="event-description">Explore the latest trends and future directions of artificial intelligence with leading experts in the field.</p>
+                                <div class="event-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> National University of Singapore</span>
+                                    <span><i class="fas fa-ticket-alt"></i> Paid</span>
+                                </div>
+                                <a href="../pages/events/ai-future.html" class="btn btn-outline">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-grid">
+                <div class="row">
+                    <!-- Event card 3 -->
+                    <div class="col-md-4">
+                        <div class="event-card" data-category="hackathon">
+                            <div class="event-image">
+                                <img src="../resources/images/sg-event.jpg" alt="Sustainability Innovation Hackathon">
+                            </div>
+                            <div class="event-content">
+                                <span class="event-date">October 20-22, 2023</span>
+                                <h3 class="event-title">Sustainability Innovation Hackathon</h3>
+                                <p class="event-description">Join teams of innovators to develop solutions for pressing sustainability challenges in a 48-hour hackathon.</p>
+                                <div class="event-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> SUTD Campus</span>
+                                    <span><i class="fas fa-ticket-alt"></i> Free</span>
+                                </div>
+                                <a href="../pages/events/sustainability-hackathon.html" class="btn btn-outline">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-grid">
+                <div class="row">                    
+                   <!-- Event card 4 -->
+                    <div class="col-md-4">
+                        <div class="event-card" data-category="conference">
+                            <div class="event-image">
+                                <img src="../resources/images/sg-event.jpg" alt="Food Tech Asia Conference">
+                            </div>
+                            <div class="event-content">
+                                <span class="event-date">November 2-3, 2023</span>
+                                <h3 class="event-title">Food Tech Asia Conference</h3>
+                                <p class="event-description">Discover the latest innovations in food technology and connect with industry leaders from across Asia.</p>
+                                <div class="event-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> Suntec Convention Centre</span>
+                                    <span><i class="fas fa-ticket-alt"></i> Paid</span>
+                                </div>
+                                <a href="../pages/events/food-tech.html" class="btn btn-outline">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-grid">
+                <div class="row">
+                    <!-- Event card 5 -->
+                    <div class="col-md-4">
+                        <div class="event-card" data-category="workshop">
+                            <div class="event-image">
+                                <img src="../resources/images/sg-event.jpg" alt="Blockchain for Business Workshop">
+                            </div>
+                            <div class="event-content">
+                                <span class="event-date">November 8, 2023</span>
+                                <h3 class="event-title">Blockchain for Business Workshop</h3>
+                                <p class="event-description">Learn how blockchain technology can transform your business operations and create new opportunities.</p>
+                                <div class="event-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> SIC Innovation Lab</span>
+                                    <span><i class="fas fa-ticket-alt"></i> Paid</span>
+                                </div>
+                                <a href="../pages/events/blockchain-workshop.html" class="btn btn-outline">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-grid">                
+                <div class="row">
+                    <!-- Event card 6 -->
+                    <div class="col-md-4">
+                        <div class="event-card" data-category="seminar">
+                            <div class="event-image">
+                                <img src="../resources/images/sg-event.jpg" alt="Digital Transformation Seminar">
+                            </div>
+                            <div class="event-content">
+                                <span class="event-date">November 10, 2023</span>
+                                <h3 class="event-title">Digital Transformation Seminar</h3>
+                                <p class="event-description">Explore strategies for successful digital transformation and learn from case studies of leading organizations.</p>
+                                <div class="event-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> Singapore Management University</span>
+                                    <span><i class="fas fa-ticket-alt"></i> Free</span>
+                                </div>
+                                <a href="../pages/events/digital-transformation.html" class="btn btn-outline">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="load-more">
+                <button class="btn btn-outline">Load More Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="../resources/images/logo-white.svg" alt="Singapore Innovation Centre Logo" class="footer-logo">
+                    <p>Singapore Innovation Centre (SIC) is a Singapore Accredited Training Organization (ATO) dedicated to providing high-quality innovation training courses.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="./courses.html">Courses</a></li>
+                        <li><a href="./events.html">Events</a></li>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="./contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-courses">
+                    <h3>Training Areas</h3>
+                    <ul>
+                        <li><a href="./courses.html#food">Food Innovation</a></li>
+                        <li><a href="./courses.html#tech">Technology Innovation</a></li>
+                        <li><a href="./courses.html#sustainability">Sustainability Innovation</a></li>
+                        <li><a href="./courses.html#special">Special Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Information</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Singapore Central Business District</li>
+                        <li><i class="fas fa-phone"></i> +65 1234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@singaporeinnovationcentre.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Singapore Innovation Centre. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    
+    <!-- Events filter script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter events
+                    eventCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

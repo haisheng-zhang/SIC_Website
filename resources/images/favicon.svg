@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- SIC Favicon -->
+  <style>
+    .primary { fill: #0071bc; }
+    .secondary { fill: #1a2b49; }
+  </style>
+  
+  <!-- Favicon Background -->
+  <rect width="32" height="32" rx="4" class="secondary" />
+  
+  <!-- Logo Icon -->
+  <g transform="translate(6, 6) scale(0.6)">
+    <circle cx="16" cy="16" r="16" class="primary" />
+    <path d="M8,16 L24,16 M16,8 L16,24" stroke="white" stroke-width="3" />
+    <path d="M8,12 L24,20" stroke="white" stroke-width="2" />
+    <path d="M8,20 L24,12" stroke="white" stroke-width="2" />
+  </g>
+</svg>
